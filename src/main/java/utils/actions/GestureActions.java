@@ -10,6 +10,9 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Pause;
 import org.openqa.selenium.interactions.PointerInput;
 import org.openqa.selenium.interactions.Sequence;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import utils.dataReader.PropertyReader;
 
 import java.time.Duration;
 import java.util.Collections;
@@ -17,9 +20,21 @@ import java.util.Collections;
 public class GestureActions {
 
     private final AndroidDriver driver;
+    private final WebDriverWait wait;
 
     public GestureActions(AndroidDriver driver) {
         this.driver = driver;
+        int timeoutSeconds = PropertyReader.getInt("explicit.wait.seconds");
+        this.wait = new WebDriverWait(driver, Duration.ofSeconds(timeoutSeconds));
+    }
+
+    /**
+     * Waits until the element located by `locator` is present, then returns it.
+     * Every By-based method below goes through this instead of driver.findElement directly,
+     * so gestures wait the same way ElementActions does.
+     */
+    private WebElement find(By locator) {
+        return wait.until(ExpectedConditions.presenceOfElementLocated(locator));
     }
 
     /**
@@ -31,11 +46,10 @@ public class GestureActions {
     }
 
     /**
-     * Long-presses an element located by a By locator (finds it first, then long presses).
+     * Long-presses an element located by a By locator (waits for it, then long presses).
      */
     public void longPress(By locator) {
-        WebElement element = driver.findElement(locator);
-        longPress(element);
+        longPress(find(locator));
     }
 
     /**
@@ -46,14 +60,14 @@ public class GestureActions {
         String uiSelector =
                 "new UiScrollable(new UiSelector().scrollable(true))" +
                         ".scrollIntoView(new UiSelector().text(\"" + text + "\"))";
-        return driver.findElement(AppiumBy.androidUIAutomator(uiSelector));
+        return find(AppiumBy.androidUIAutomator(uiSelector));
     }
 
     public WebElement scrollToTextContains(String text) {
         String uiSelector =
                 "new UiScrollable(new UiSelector().scrollable(true))" +
                         ".scrollIntoView(new UiSelector().textContains(\"" + text + "\"))";
-        return driver.findElement(AppiumBy.androidUIAutomator(uiSelector));
+        return find(AppiumBy.androidUIAutomator(uiSelector));
     }
 
     /**
@@ -64,9 +78,8 @@ public class GestureActions {
         String uiSelector =
                 "new UiScrollable(new UiSelector().scrollable(true))" +
                         ".scrollIntoView(new UiSelector().resourceId(\"" + resourceId + "\"))";
-        return driver.findElement(AppiumBy.androidUIAutomator(uiSelector));
+        return find(AppiumBy.androidUIAutomator(uiSelector));
     }
-
 
     /**
      * Swipes in the given direction within the bounding box of the given element.
@@ -85,13 +98,13 @@ public class GestureActions {
         swipe(element, direction, 0.75);
     }
 
-    /** Finds the element first, then swipes on it. */
+    /** Waits for the element, then swipes on it. */
     public void swipe(By locator, String direction, double percent) {
-        swipe(driver.findElement(locator), direction, percent);
+        swipe(find(locator), direction, percent);
     }
 
     public void swipe(By locator, String direction) {
-        swipe(driver.findElement(locator), direction, 0.75);
+        swipe(find(locator), direction, 0.75);
     }
 
     /**
@@ -121,7 +134,7 @@ public class GestureActions {
     }
 
     public void swipeBetween(By fromLocator, By toLocator) {
-        swipeBetween(driver.findElement(fromLocator), driver.findElement(toLocator));
+        swipeBetween(find(fromLocator), find(toLocator));
     }
 
     /**
@@ -152,7 +165,7 @@ public class GestureActions {
     }
 
     public void dragAndDrop(By fromLocator, By toLocator) {
-        dragAndDrop(driver.findElement(fromLocator), driver.findElement(toLocator));
+        dragAndDrop(find(fromLocator), find(toLocator));
     }
 
     /**
