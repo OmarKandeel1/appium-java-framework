@@ -1,11 +1,5 @@
-import com.google.common.collect.ImmutableMap;
-import io.appium.java_client.AppiumBy;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
-import org.testng.Assert;
 import org.testng.annotations.Test;
-import utils.actions.ElementActions;
-import utils.actions.GestureActions;
+import ui.generalstore.BaseTest;
 
 public class test extends BaseTest {
 
@@ -48,46 +42,50 @@ public class test extends BaseTest {
 //    }
 
 
-    @Test
-    public void scrollToWebViewTest() {
-        mobileDriver.elementActions().click(AppiumBy.accessibilityId("Views"));
-        WebElement webView = mobileDriver.gestureActions().scrollToText("WebView");
-        webView.click();
-    }
+//    @Test
+//    public void scrollToWebViewTest() {
+//        mobileDriver.elementActions().click(AppiumBy.accessibilityId("Views"));
+//        WebElement webView = mobileDriver.gestureActions().scrollToText("WebView");
+//        webView.click();
+//    }
+//
+//    @Test
+//    public void swipeTest() {
+//        By views_L = AppiumBy.accessibilityId("Views");
+//        By gallery_L = AppiumBy.accessibilityId("Gallery");
+//        By photos_L = AppiumBy.accessibilityId("1. Photos");
+//        By firstPhoto_L = AppiumBy.xpath("//android.widget.Gallery[@resource-id=\"io.appium.android.apis:id/gallery\"]/android.widget.ImageView[1]\n");
+//        By secondPhoto_L = AppiumBy.xpath("//android.widget.Gallery[@resource-id=\"io.appium.android.apis:id/gallery\"]/android.widget.ImageView[2]\n");
+//
+//
+//        mobileDriver.elementActions().click(views_L);
+//        mobileDriver.elementActions().click(gallery_L);
+//        mobileDriver.elementActions().click(photos_L);
+//        Assert.assertTrue(mobileDriver.elementActions().find(firstPhoto_L).getAttribute("focusable").equals("true"));
+//        mobileDriver.gestureActions().swipe(firstPhoto_L, "left");
+//        Assert.assertTrue(mobileDriver.elementActions().find(firstPhoto_L).getAttribute("focusable").equals("false"));
+//        Assert.assertTrue(mobileDriver.elementActions().find(secondPhoto_L).getAttribute("focusable").equals("true"));
+//
+//    }
 
-    @Test
-    public void swipeTest() {
-        By views_L = AppiumBy.accessibilityId("Views");
-        By gallery_L = AppiumBy.accessibilityId("Gallery");
-        By photos_L = AppiumBy.accessibilityId("1. Photos");
-        By firstPhoto_L = AppiumBy.xpath("//android.widget.Gallery[@resource-id=\"io.appium.android.apis:id/gallery\"]/android.widget.ImageView[1]\n");
-        By secondPhoto_L = AppiumBy.xpath("//android.widget.Gallery[@resource-id=\"io.appium.android.apis:id/gallery\"]/android.widget.ImageView[2]\n");
+//    @Test
+//    public void dragNDropTest(){
+//        By views_L = AppiumBy.accessibilityId("Views");
+//        By dragNDrop_L = AppiumBy.accessibilityId("Drag and Drop");
+//        By firstCircle_L = AppiumBy.id("io.appium.android.apis:id/drag_dot_1");
+//        By secondCircle_L = AppiumBy.id("io.appium.android.apis:id/drag_dot_2");
+//        By dropText_L = AppiumBy.id("io.appium.android.apis:id/drag_result_text");
+//        mobileDriver.elementActions().click(views_L);
+//        mobileDriver.elementActions().click(dragNDrop_L);
+//        mobileDriver.gestureActions().dragAndDrop(firstCircle_L, secondCircle_L);
+//        Assert.assertTrue(mobileDriver.elementActions().find(dropText_L).isDisplayed());
+//
+//
+//    }
 
+@Test
+    public void generalStoreTest(){
 
-        mobileDriver.elementActions().click(views_L);
-        mobileDriver.elementActions().click(gallery_L);
-        mobileDriver.elementActions().click(photos_L);
-        Assert.assertTrue(mobileDriver.elementActions().find(firstPhoto_L).getAttribute("focusable").equals("true"));
-        mobileDriver.gestureActions().swipe(firstPhoto_L, "left");
-        Assert.assertTrue(mobileDriver.elementActions().find(firstPhoto_L).getAttribute("focusable").equals("false"));
-        Assert.assertTrue(mobileDriver.elementActions().find(secondPhoto_L).getAttribute("focusable").equals("true"));
-
-    }
-
-    @Test
-    public void dragNDropTest(){
-        By views_L = AppiumBy.accessibilityId("Views");
-        By dragNDrop_L = AppiumBy.accessibilityId("Drag and Drop");
-        By firstCircle_L = AppiumBy.id("io.appium.android.apis:id/drag_dot_1");
-        By secondCircle_L = AppiumBy.id("io.appium.android.apis:id/drag_dot_2");
-        By dropText_L = AppiumBy.id("io.appium.android.apis:id/drag_result_text");
-        mobileDriver.elementActions().click(views_L);
-        mobileDriver.elementActions().click(dragNDrop_L);
-        mobileDriver.gestureActions().dragAndDrop(firstCircle_L, secondCircle_L);
-        Assert.assertTrue(mobileDriver.elementActions().find(dropText_L).isDisplayed());
-
-
-    }
-
+}
 
 }
