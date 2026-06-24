@@ -33,4 +33,10 @@ public class MobileDriver {
     public AndroidDriver getRawDriver() {
         return rawDriver;
     }
+
+    public void navigateToActivity(String activityName) {
+        String appPackage = rawDriver.getCurrentPackage();
+        rawDriver.executeScript("mobile: startActivity", com.google.common.collect.ImmutableMap.of(
+                "component", appPackage + "/" + activityName));
+    }
 }
